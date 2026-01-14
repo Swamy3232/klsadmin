@@ -531,6 +531,10 @@ const CustomerRow = ({
                 </button>
               </div>
               <div className="mt-3 text-sm text-gray-600">
+                <div className="mb-1">
+                  <span className="font-medium">Package:</span>{" "}
+                  ₹{customer.selected_pack}
+                </div>
                 <span className="font-medium">Remaining months:</span>{" "}
                 {calculateRemainingMonths(customer.start_date, customer.total_months)} months
               </div>
