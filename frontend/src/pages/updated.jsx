@@ -336,7 +336,7 @@ const UpdateCustomer = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Package:</span>
-                      <span className="font-medium">${selectedCustomer.selected_pack}</span>
+                      <span className="font-medium">₹{selectedCustomer.selected_pack}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Start Date:</span>
@@ -431,7 +431,7 @@ const CustomerRow = ({
         </td>
         <td className="p-4">
           <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
-            <span>${customer.selected_pack}</span>
+            <span>₹{customer.selected_pack}</span>
           </span>
         </td>
         <td className="p-4">

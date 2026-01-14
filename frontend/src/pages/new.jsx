@@ -51,12 +51,12 @@ const AddCustomer = () => {
 
   // Pack options as per requirement: 500,1000,2000,3000,4000,5000
   const packOptions = [
-    { value: "500", label: "Basic Plan - $500" },
-    { value: "1000", label: "Standard Plan - $1,000" },
-    { value: "2000", label: "Premium Plan - $2,000" },
-    { value: "3000", label: "Business Plan - $3,000" },
-    { value: "4000", label: "Professional Plan - $4,000" },
-    { value: "5000", label: "Enterprise Plan - $5,000" },
+    { value: "500", label: "Basic Plan - ₹500" },
+    { value: "1000", label: "Standard Plan - ₹1,000" },
+    { value: "2000", label: "Premium Plan - ₹2,000" },
+    { value: "3000", label: "Business Plan - ₹3,000" },
+    { value: "4000", label: "Professional Plan - ₹4,000" },
+    { value: "5000", label: "Enterprise Plan - ₹5,000" },
   ];
 
   // Handle input change
@@ -344,7 +344,7 @@ const AddCustomer = () => {
                   >
                     <div className="font-medium text-gray-800">{demo.full_name}</div>
                     <div className="text-sm text-gray-600 mt-1">Phone: {demo.phone}</div>
-                    <div className="text-sm text-gray-600">Package: ${demo.selected_pack}</div>
+                    <div className="text-sm text-gray-600">Package: ₹{demo.selected_pack}</div>
                   </button>
                 ))}
               </div>
@@ -365,7 +365,7 @@ const AddCustomer = () => {
                         : 'border-gray-200'
                     }`}
                   >
-                    <div className="font-medium text-gray-800">${pack.value}</div>
+                    <div className="font-medium text-gray-800">₹{pack.value}</div>
                     <div className="text-sm text-gray-600">{pack.label.split(' - ')[0]}</div>
                   </div>
                 ))}
@@ -391,7 +391,7 @@ const AddCustomer = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-blue-100">Package:</span>
                   <span className="font-semibold">
-                    {formData.selected_pack ? `$${formData.selected_pack}` : 'Not selected'}
+                    {formData.selected_pack ? `₹${formData.selected_pack}` : 'Not selected'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
@@ -409,8 +409,8 @@ const AddCustomer = () => {
                     <span>Total Value:</span>
                     <span className="font-bold">
                       {formData.selected_pack 
-                        ? `$${(parseInt(formData.selected_pack) || 0).toLocaleString()}`
-                        : '$0'}
+                        ? `₹${(parseInt(formData.selected_pack) || 0).toLocaleString()}`
+                        : '₹0'}
                     </span>
                   </div>
                 </div>

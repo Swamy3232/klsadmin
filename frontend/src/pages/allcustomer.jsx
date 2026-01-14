@@ -381,7 +381,7 @@ const AllCustomers = () => {
                   >
                     <option value="all">All Packages</option>
                     {packageOptions.map(pkg => (
-                      <option key={pkg} value={pkg}>${pkg}</option>
+                      <option key={pkg} value={pkg}>₹{pkg}</option>
                     ))}
                   </select>
                 </div>
@@ -524,7 +524,7 @@ const AllCustomers = () => {
                           <td className="p-4">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 rounded-full">
                               <Package className="w-3 h-3" />
-                              <span className="font-semibold">${customer.selected_pack}</span>
+                              <span className="font-semibold">₹{customer.selected_pack}</span>
                             </div>
                           </td>
                           <td className="p-4">
@@ -624,7 +624,7 @@ const AllCustomers = () => {
                                       </div>
                                       <div className="flex items-center gap-2">
                                         <Package className="w-4 h-4 text-gray-400" />
-                                        <span className="text-sm">Package: ${customer.selected_pack}</span>
+                                        <span className="text-sm">Package: ₹{customer.selected_pack}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -644,7 +644,7 @@ const AllCustomers = () => {
                                       <div className="text-sm">
                                         <span className="text-gray-600">Monthly Payment: </span>
                                         <span className="font-semibold">
-                                          ${Math.round((parseInt(customer.selected_pack) || 0) / TOTAL_EMI)}
+                                          ₹{Math.round((parseInt(customer.selected_pack) || 0) / TOTAL_EMI)}
                                         </span>
                                       </div>
                                     </div>
@@ -738,7 +738,7 @@ const AllCustomers = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Package:</span>
-                      <span className="font-medium">${selectedCustomer.selected_pack}</span>
+                      <span className="font-medium">₹{selectedCustomer.selected_pack}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Start Date:</span>
