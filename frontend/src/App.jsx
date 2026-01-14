@@ -1,21 +1,53 @@
-// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import AddCustomer from "./pages/new";
-import AdminNavbar from "./components/nav";
 import UpdateCustomer from "./pages/updated";
 import AllCustomers from "./pages/allcustomer";
+import LoginPage from "./pages/login";
+import AdminNavbar from "./components/nav";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
-      {/* Only Admin Navbar */}
-      <AdminNavbar />
-
       <Routes>
-        <Route path="/add-member" element={<AddCustomer />} />
-        <Route path="/approve-members" element={<UpdateCustomer />} />
-        <Route path="/all-chitti" element={<AllCustomers />} />
+        {/* Public Route */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/add-member"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <AddCustomer />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/approve-members"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <UpdateCustomer />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/all-chitti"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <AllCustomers />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Default redirect */}
+        <Route path="*" element={<LoginPage />} />
       </Routes>
     </Router>
   );
