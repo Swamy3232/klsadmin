@@ -6,7 +6,6 @@ import {
   User, 
   Home, 
   Lock, 
-  Package, 
   Calendar,
   Clock,
   CheckCircle,
@@ -20,9 +19,8 @@ const AddCustomer = () => {
     full_name: "",
     address: "",
     password: "",
-    selected_pack: "",
     start_date: "",
-    total_months: 24, // Fixed to 24 months
+    total_months: 24,
   });
 
   const [message, setMessage] = useState("");
@@ -36,27 +34,17 @@ const AddCustomer = () => {
       full_name: "John Smith",
       address: "123 Main St, New York",
       password: "demo123",
-      selected_pack: "3000",
       start_date: new Date().toISOString().split('T')[0],
+      total_months: 24,
     },
     {
       phone: "9123456789",
       full_name: "Sarah Johnson",
       address: "456 Oak Ave, Chicago",
       password: "demo456",
-      selected_pack: "2000",
       start_date: new Date().toISOString().split('T')[0],
+      total_months: 12,
     }
-  ];
-
-  // Pack options as per requirement: 500,1000,2000,3000,4000,5000
-  const packOptions = [
-    { value: "500", label: "Basic Plan - ₹500" },
-    { value: "1000", label: "Standard Plan - ₹1,000" },
-    { value: "2000", label: "Premium Plan - ₹2,000" },
-    { value: "3000", label: "Business Plan - ₹3,000" },
-    { value: "4000", label: "Professional Plan - ₹4,000" },
-    { value: "5000", label: "Enterprise Plan - ₹5,000" },
   ];
 
   // Handle input change
@@ -68,11 +56,39 @@ const AddCustomer = () => {
   const fillWithDemo = (index) => {
     setFormData({
       ...demoData[index],
-      total_months: 24,
       start_date: new Date().toISOString().split('T')[0]
     });
     setMessage("");
     setError("");
+  };
+
+  // Helper function to extract error message from FastAPI validation errors
+  const extractErrorMessage = (error) => {
+    if (!error?.response?.data) {
+      return "Something went wrong. Please try again.";
+    }
+
+    const detail = error.response.data.detail;
+
+    // If detail is a string, return it directly
+    if (typeof detail === "string") {
+      return detail;
+    }
+
+    // If detail is an array (FastAPI validation errors)
+    if (Array.isArray(detail)) {
+      return detail.map((err) => {
+        const field = err.loc && err.loc.length > 1 ? err.loc[err.loc.length - 1] : "field";
+        return `${field}: ${err.msg}`;
+      }).join(", ");
+    }
+
+    // If detail is an object
+    if (typeof detail === "object") {
+      return detail.msg || detail.message || JSON.stringify(detail);
+    }
+
+    return "Something went wrong. Please try again.";
   };
 
   // Handle form submit
@@ -83,9 +99,19 @@ const AddCustomer = () => {
     setIsSubmitting(true);
 
     try {
+      // Prepare payload matching backend API - convert total_months to number
+      const payload = {
+        phone: formData.phone,
+        full_name: formData.full_name,
+        address: formData.address,
+        password: formData.password,
+        start_date: formData.start_date,
+        total_months: parseInt(formData.total_months, 10),
+      };
+
       const res = await axios.post(
         "https://klsbackend.onrender.com/create-customer",
-        formData
+        payload
       );
       setMessage(res.data.message || "Customer added successfully!");
       setFormData({
@@ -93,12 +119,12 @@ const AddCustomer = () => {
         full_name: "",
         address: "",
         password: "",
-        selected_pack: "",
         start_date: "",
-        total_months: 24, // Reset to 24
+        total_months: 24,
       });
     } catch (err) {
-      setError(err.response?.data?.detail || "Something went wrong");
+      const errorMessage = extractErrorMessage(err);
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -111,7 +137,6 @@ const AddCustomer = () => {
       full_name: "",
       address: "",
       password: "",
-      selected_pack: "",
       start_date: "",
       total_months: 24,
     });
@@ -133,7 +158,7 @@ const AddCustomer = () => {
             </h1>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Add new customers to your system. All plans are for a fixed 24-month period.
+            Add new customers to your system. Select duration of 12 or 24 months.
           </p>
         </div>
 
@@ -234,32 +259,11 @@ const AddCustomer = () => {
                 {/* Subscription Details Section */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <Package className="w-5 h-5 text-blue-600" />
+                    <Calendar className="w-5 h-5 text-blue-600" />
                     Subscription Details
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
-                        <Package className="w-4 h-4" />
-                        Select Package
-                      </label>
-                      <select
-                        name="selected_pack"
-                        value={formData.selected_pack}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none"
-                        required
-                      >
-                        <option value="">Choose a package</option>
-                        {packOptions.map((pack) => (
-                          <option key={pack.value} value={pack.value}>
-                            {pack.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
                     <div>
                       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                         <Calendar className="w-4 h-4" />
@@ -278,14 +282,18 @@ const AddCustomer = () => {
                     <div>
                       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                         <Clock className="w-4 h-4" />
-                        Duration (Fixed)
+                        Duration
                       </label>
-                      <div className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl flex items-center justify-between">
-                        <span className="text-gray-700">24 Months</span>
-                        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-lg">
-                          Fixed Term
-                        </span>
-                      </div>
+                      <select
+                        name="total_months"
+                        value={formData.total_months}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none"
+                        required
+                      >
+                        <option value="12">12 Months</option>
+                        <option value="24">24 Months</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -344,40 +352,36 @@ const AddCustomer = () => {
                   >
                     <div className="font-medium text-gray-800">{demo.full_name}</div>
                     <div className="text-sm text-gray-600 mt-1">Phone: {demo.phone}</div>
-                    <div className="text-sm text-gray-600">Package: ₹{demo.selected_pack}</div>
+                    <div className="text-sm text-gray-600">Duration: {demo.total_months} months</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Package Info Section */}
+            {/* Info Section */}
             <div className="bg-white rounded-2xl shadow-xl p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Package Details
+                Subscription Info
               </h3>
+              
               <div className="space-y-3">
-                {packOptions.map((pack) => (
-                  <div
-                    key={pack.value}
-                    className={`p-3 border rounded-lg ${
-                      formData.selected_pack === pack.value
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200'
-                    }`}
-                  >
-                    <div className="font-medium text-gray-800">₹{pack.value}</div>
-                    <div className="text-sm text-gray-600">{pack.label.split(' - ')[0]}</div>
-                  </div>
-                ))}
+                <div className="p-3 border border-gray-200 rounded-lg">
+                  <div className="font-medium text-gray-800">12 Months Plan</div>
+                  <div className="text-sm text-gray-600">Short-term subscription</div>
+                </div>
+                <div className="p-3 border border-gray-200 rounded-lg">
+                  <div className="font-medium text-gray-800">24 Months Plan</div>
+                  <div className="text-sm text-gray-600">Long-term subscription</div>
+                </div>
               </div>
               
-              <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <Clock className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-medium text-yellow-800">Important Note</h4>
-                    <p className="text-sm text-yellow-700 mt-1">
-                      All subscriptions are for a fixed 24-month period. The duration cannot be changed.
+                    <h4 className="font-medium text-blue-800">Note</h4>
+                    <p className="text-sm text-blue-700 mt-1">
+                      Customer will be created with "pending" status and requires admin approval.
                     </p>
                   </div>
                 </div>
@@ -389,14 +393,10 @@ const AddCustomer = () => {
               <h3 className="text-lg font-semibold mb-4">Current Selection</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-blue-100">Package:</span>
-                  <span className="font-semibold">
-                    {formData.selected_pack ? `₹${formData.selected_pack}` : 'Not selected'}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
                   <span className="text-blue-100">Duration:</span>
-                  <span className="font-semibold">24 months</span>
+                  <span className="font-semibold">
+                    {formData.total_months || 24} months
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-blue-100">Start Date:</span>
@@ -405,13 +405,9 @@ const AddCustomer = () => {
                   </span>
                 </div>
                 <div className="pt-4 border-t border-blue-500">
-                  <div className="flex justify-between items-center text-lg">
-                    <span>Total Value:</span>
-                    <span className="font-bold">
-                      {formData.selected_pack 
-                        ? `₹${(parseInt(formData.selected_pack) || 0).toLocaleString()}`
-                        : '₹0'}
-                    </span>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-blue-100">Status:</span>
+                    <span className="font-semibold text-yellow-300">Pending Approval</span>
                   </div>
                 </div>
               </div>

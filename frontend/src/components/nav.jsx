@@ -45,6 +45,16 @@ const AdminNavbar = () => {
       path: "/add-collection", 
       icon: <CreditCard className="w-4 h-4 md:w-5 md:h-5" />
     },
+    { 
+      name:"Your Payments",
+      path:"/payments",
+      icon:<CreditCard className="w-4 h-4 md:w-5 md:h-5" />
+    },
+    {
+      name:"Update Payments",
+      path:"/update-payments",
+      icon:<CreditCard className="w-4 h-4 md:w-5 md:h-5" />
+    }
   ];
 
   const handleLogout = () => {

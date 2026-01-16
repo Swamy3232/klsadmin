@@ -2,11 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import AddCustomer from "./pages/new";
+// import Create from "./pages/updated";
+import CreatePayment from "./pages/updated";
+import GoldUsersSummary from "./pages/allcustomer";
 import UpdateCustomer from "./pages/updated";
-import AllCustomers from "./pages/allcustomer";
 import LoginPage from "./pages/login";
 import AdminNavbar from "./components/nav";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PaymentForm from "./pages/payment";
+import Payments from "./pages/updateamount";
 
 function App() {
   return (
@@ -41,7 +45,25 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminNavbar />
-              <AllCustomers />
+              <GoldUsersSummary />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payments"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <PaymentForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/update-payments"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <Payments />
             </ProtectedRoute>
           }
         />
