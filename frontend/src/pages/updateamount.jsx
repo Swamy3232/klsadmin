@@ -244,11 +244,12 @@ const Payments = () => {
   };
 
   const getStats = () => {
-    const total = payments.length;
-    const approved = payments.filter(p => p.approval_status === "approved").length;
-    const pending = payments.filter(p => p.approval_status === "pending").length;
-    const rejected = payments.filter(p => p.approval_status === "rejected").length;
-    const totalAmount = payments
+    // Use filteredPayments to show stats according to current filters
+    const total = filteredPayments.length;
+    const approved = filteredPayments.filter(p => p.approval_status === "approved").length;
+    const pending = filteredPayments.filter(p => p.approval_status === "pending").length;
+    const rejected = filteredPayments.filter(p => p.approval_status === "rejected").length;
+    const totalAmount = filteredPayments
       .filter(p => p.approval_status === "approved")
       .reduce((sum, p) => sum + (p.paid_amount || 0), 0);
 
@@ -321,106 +322,106 @@ const Payments = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Payments</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.total}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Total Payments</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{stats.total}</p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-blue-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Approved</p>
-                <p className="text-3xl font-bold text-green-600 mt-2">{stats.approved}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Approved</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-600 mt-1 sm:mt-2">{stats.approved}</p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-green-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Pending</p>
-                <p className="text-3xl font-bold text-amber-600 mt-2">{stats.pending}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Pending</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-amber-600 mt-1 sm:mt-2">{stats.pending}</p>
               </div>
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                <Clock className="w-6 h-6 text-amber-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Rejected</p>
-                <p className="text-3xl font-bold text-red-600 mt-2">{stats.rejected}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Rejected</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 mt-1 sm:mt-2">{stats.rejected}</p>
               </div>
-              <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                <XCircle className="w-6 h-6 text-red-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow col-span-2 lg:col-span-1">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Amount</p>
-                <p className="text-3xl font-bold text-purple-600 mt-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Total Amount</p>
+                <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-purple-600 mt-1 sm:mt-2">
                   ₹{stats.totalAmount.toLocaleString()}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <IndianRupee className="w-6 h-6 text-purple-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <IndianRupee className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search by name, phone, or UTR..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div className="relative">
-                <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Filter className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="w-full pl-12 pr-10 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                  className="w-full pl-10 sm:pl-12 pr-8 sm:pr-10 py-2.5 sm:py-3 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none text-sm sm:text-base"
                 >
                   <option value="all">All Status</option>
                   <option value="pending">Pending</option>
                   <option value="approved">Approved</option>
                   <option value="rejected">Rejected</option>
                 </select>
-                <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90" />
+                <ChevronRight className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 rotate-90 pointer-events-none" />
               </div>
 
               <div className="relative">
-                <CalendarDays className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <CalendarDays className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                 <select
                   value={monthFilter}
                   onChange={(e) => setMonthFilter(e.target.value)}
-                  className="w-full pl-12 pr-10 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                  className="w-full pl-10 sm:pl-12 pr-8 sm:pr-10 py-2.5 sm:py-3 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none text-sm sm:text-base"
                 >
                   <option value="all">All Months</option>
                   <option value="current">Current Month</option>
@@ -430,16 +431,16 @@ const Payments = () => {
                     </option>
                   ))}
                 </select>
-                <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90" />
+                <ChevronRight className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 rotate-90 pointer-events-none" />
               </div>
 
               {monthFilter !== "all" && monthFilter !== "current" && (
                 <div className="relative">
-                  <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Calendar className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                   <select
                     value={yearFilter}
                     onChange={(e) => setYearFilter(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                    className="w-full pl-10 sm:pl-12 pr-8 sm:pr-10 py-2.5 sm:py-3 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none text-sm sm:text-base"
                   >
                     {years.map(year => (
                       <option key={year} value={year}>
@@ -447,7 +448,7 @@ const Payments = () => {
                       </option>
                     ))}
                   </select>
-                  <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 rotate-90" />
+                  <ChevronRight className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 rotate-90 pointer-events-none" />
                 </div>
               )}
             </div>
@@ -582,45 +583,47 @@ const Payments = () => {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       <div className="flex items-center gap-2">
                         <input
                           type="checkbox"
                           checked={selectedPayments.length === filteredPayments.length && filteredPayments.length > 0}
                           onChange={selectAllPayments}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 sm:w-5 sm:h-5"
                         />
-                        Customer
+                        <span className="hidden sm:inline">Customer</span>
+                        <span className="sm:hidden">Customer</span>
                       </div>
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden sm:table-cell">
                       <div className="flex items-center gap-2">
                         <Phone className="w-4 h-4" />
                         Contact
                       </div>
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       <div className="flex items-center gap-2">
                         <Banknote className="w-4 h-4" />
-                        Amount
+                        <span className="hidden sm:inline">Amount</span>
+                        <span className="sm:hidden">Amt</span>
                       </div>
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden md:table-cell">
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4" />
                         UTR Number
                       </div>
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden lg:table-cell">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         Date & Time
                       </div>
                     </th>
-                    <th className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
@@ -645,65 +648,67 @@ const Payments = () => {
                   ) : (
                     filteredPayments.map((payment) => (
                       <tr key={payment.id} className="hover:bg-gray-50 transition-colors duration-150">
-                        <td className="p-6">
-                          <div className="flex items-center gap-3">
+                        <td className="p-3 sm:p-6">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <input
                               type="checkbox"
                               checked={selectedPayments.includes(payment.id)}
                               onChange={() => togglePaymentSelection(payment.id)}
-                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
                             />
-                            <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center">
-                              <User className="w-5 h-5 text-blue-600" />
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
+                              <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                             </div>
-                            <div>
-                              <p className="font-semibold text-gray-900">{payment.name}</p>
-                              <p className="text-sm text-gray-500">Payment #{payment.id?.slice(-6)}</p>
+                            <div className="min-w-0">
+                              <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">{payment.name}</p>
+                              <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Payment #{payment.id?.slice(-6)}</p>
+                              <p className="text-xs text-gray-500 sm:hidden">{payment.phone}</p>
                             </div>
                           </div>
                         </td>
-                        <td className="p-6">
+                        <td className="p-3 sm:p-6 hidden sm:table-cell">
                           <div className="flex items-center gap-2">
                             <Phone className="w-4 h-4 text-gray-400" />
-                            <span className="font-mono">{payment.phone}</span>
+                            <span className="font-mono text-sm">{payment.phone}</span>
                           </div>
                         </td>
-                        <td className="p-6">
+                        <td className="p-3 sm:p-6">
                           <div className="flex items-center gap-2">
-                            <IndianRupee className="w-4 h-4 text-gray-500" />
-                            <span className="text-xl font-bold text-gray-900">
+                            <IndianRupee className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                            <span className="text-lg sm:text-xl font-bold text-gray-900">
                               ₹{payment.paid_amount?.toLocaleString()}
                             </span>
                           </div>
                         </td>
-                        <td className="p-6">
+                        <td className="p-3 sm:p-6 hidden md:table-cell">
                           <div className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                              <Shield className="w-5 h-5 text-gray-600" />
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
                             </div>
-                            <span className="font-mono text-sm">{payment.utr_number}</span>
+                            <span className="font-mono text-xs sm:text-sm truncate">{payment.utr_number}</span>
                           </div>
                         </td>
-                        <td className="p-6">
+                        <td className="p-3 sm:p-6">
                           <span
-                            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border font-medium ${getStatusColor(
+                            className={`inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl border text-xs sm:text-sm font-medium ${getStatusColor(
                               payment.approval_status
                             )}`}
                           >
                             {getStatusIcon(payment.approval_status)}
-                            {payment.approval_status?.charAt(0).toUpperCase() + payment.approval_status?.slice(1)}
+                            <span className="hidden sm:inline">{payment.approval_status?.charAt(0).toUpperCase() + payment.approval_status?.slice(1)}</span>
+                            <span className="sm:hidden">{payment.approval_status?.charAt(0).toUpperCase()}</span>
                           </span>
                         </td>
-                        <td className="p-6">
+                        <td className="p-3 sm:p-6 hidden lg:table-cell">
                           <div className="space-y-1">
-                            <p className="font-medium text-gray-900">
+                            <p className="font-medium text-gray-900 text-sm">
                               {new Date(payment.created_at).toLocaleDateString('en-IN', {
                                 day: '2-digit',
                                 month: 'short',
                                 year: 'numeric'
                               })}
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-xs text-gray-500">
                               {new Date(payment.created_at).toLocaleTimeString('en-IN', {
                                 hour: '2-digit',
                                 minute: '2-digit',
@@ -712,44 +717,46 @@ const Payments = () => {
                             </p>
                           </div>
                         </td>
-                        <td className="p-6">
-                          <div className="flex items-center gap-2">
+                        <td className="p-3 sm:p-6">
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                             {payment.approval_status === "pending" ? (
                               <>
                                 <button
                                   onClick={() => updateStatus(payment, "approved")}
                                   disabled={updatingId === payment.id}
-                                  className="px-4 py-2 bg-green-50 text-green-700 border border-green-200 rounded-lg hover:bg-green-100 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                  className="min-h-[44px] px-3 sm:px-4 py-2 bg-green-50 text-green-700 border border-green-200 rounded-lg hover:bg-green-100 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
                                 >
                                   {updatingId === payment.id ? (
                                     <RefreshCw className="w-4 h-4 animate-spin" />
                                   ) : (
                                     <CheckCircle className="w-4 h-4" />
                                   )}
-                                  Approve
+                                  <span className="hidden sm:inline">Approve</span>
+                                  <span className="sm:hidden">App</span>
                                 </button>
                                 <button
                                   onClick={() => updateStatus(payment, "rejected")}
                                   disabled={updatingId === payment.id}
-                                  className="px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                  className="min-h-[44px] px-3 sm:px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
                                 >
                                   {updatingId === payment.id ? (
                                     <RefreshCw className="w-4 h-4 animate-spin" />
                                   ) : (
                                     <XCircle className="w-4 h-4" />
                                   )}
-                                  Reject
+                                  <span className="hidden sm:inline">Reject</span>
+                                  <span className="sm:hidden">Rej</span>
                                 </button>
                               </>
                             ) : (
                               <div className="flex items-center gap-2">
-                                <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+                                <button className="min-h-[44px] min-w-[44px] p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
                                   <Eye className="w-5 h-5" />
                                 </button>
-                                <span className="text-gray-400 italic">Processed</span>
+                                <span className="text-gray-400 italic text-xs sm:text-sm hidden sm:inline">Processed</span>
                               </div>
                             )}
-                            <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <button className="min-h-[44px] min-w-[44px] p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
                               <MoreVertical className="w-5 h-5" />
                             </button>
                           </div>
@@ -763,19 +770,21 @@ const Payments = () => {
 
             {/* Table Footer */}
             {filteredPayments.length > 0 && (
-              <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
-                <p className="text-sm text-gray-600">
+              <div className="px-3 sm:px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
                   Showing <span className="font-semibold">{filteredPayments.length}</span> of{" "}
                   <span className="font-semibold">{payments.length}</span> payments
-                  {monthFilter !== "all" && ` (${monthFilter === "current" ? "Current Month" : 
-                    `${months.find(m => m.value === monthFilter)?.label} ${yearFilter}`})`}
+                  {monthFilter !== "all" && (
+                    <span className="hidden sm:inline"> ({monthFilter === "current" ? "Current Month" : 
+                      `${months.find(m => m.value === monthFilter)?.label} ${yearFilter}`})</span>
+                  )}
                 </p>
-                <div className="flex items-center gap-4">
-                  <button className="text-sm text-gray-600 hover:text-gray-900 px-3 py-1 rounded-lg hover:bg-gray-100">
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <button className="min-h-[44px] text-xs sm:text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
                     Previous
                   </button>
-                  <span className="text-sm font-medium text-gray-900">1</span>
-                  <button className="text-sm text-gray-600 hover:text-gray-900 px-3 py-1 rounded-lg hover:bg-gray-100">
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">1</span>
+                  <button className="min-h-[44px] text-xs sm:text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
                     Next
                   </button>
                 </div>
@@ -785,41 +794,40 @@ const Payments = () => {
         )}
 
         {/* Summary Section */}
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl border border-blue-200 p-6">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl border border-blue-200 p-4 sm:p-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" />
+            <div className="flex-1">
+              <h3 className="text-base sm:text-lg font-semibold text-blue-900 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
                 Payment Summary
               </h3>
-              <p className="text-blue-700 mt-1">
+              <p className="text-sm sm:text-base text-blue-700 mt-1">
                 Total approved amount: <span className="font-bold">₹{stats.totalAmount.toLocaleString()}</span>
-                {monthFilter !== "all" && ` (Filtered: ₹${
-                  filteredPayments
-                    .filter(p => p.approval_status === "approved")
-                    .reduce((sum, p) => sum + (p.paid_amount || 0), 0)
-                    .toLocaleString()
-                })`}
+                {(searchTerm || statusFilter !== "all" || monthFilter !== "all") && (
+                  <span className="text-xs sm:text-sm ml-1 sm:ml-2 text-blue-600 block sm:inline">
+                    (Based on current filters)
+                  </span>
+                )}
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center sm:justify-end gap-3 sm:gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">
+                <div className="text-xl sm:text-2xl font-bold text-green-600">
                   {filteredPayments.filter(p => p.approval_status === "approved").length}
                 </div>
-                <div className="text-sm text-green-700">Approved</div>
+                <div className="text-xs sm:text-sm text-green-700">Approved</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-amber-600">
+                <div className="text-xl sm:text-2xl font-bold text-amber-600">
                   {filteredPayments.filter(p => p.approval_status === "pending").length}
                 </div>
-                <div className="text-sm text-amber-700">Pending</div>
+                <div className="text-xs sm:text-sm text-amber-700">Pending</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-red-600">
+                <div className="text-xl sm:text-2xl font-bold text-red-600">
                   {filteredPayments.filter(p => p.approval_status === "rejected").length}
                 </div>
-                <div className="text-sm text-red-700">Rejected</div>
+                <div className="text-xs sm:text-sm text-red-700">Rejected</div>
               </div>
             </div>
           </div>

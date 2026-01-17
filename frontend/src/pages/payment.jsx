@@ -121,71 +121,71 @@ const PaymentForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-4 sm:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-2xl mb-6">
-            <CreditCard className="w-10 h-10 text-emerald-600" />
+        <div className="text-center mb-6 sm:mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl sm:rounded-2xl mb-4 sm:mb-6">
+            <CreditCard className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-600" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
             Payment Submission
           </h1>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto px-4">
             Submit your EMI payment securely with UTR verification
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Left Side - Info Cards */}
-          <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <ShieldCheck className="w-6 h-6 text-blue-600" />
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Secure Payment</h3>
-                  <p className="text-sm text-gray-600">Bank-level security</p>
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Secure Payment</h3>
+                  <p className="text-xs sm:text-sm text-gray-600">Bank-level security</p>
                 </div>
               </div>
-              <p className="text-gray-700">
+              <p className="text-xs sm:text-sm text-gray-700">
                 All transactions are encrypted and processed securely with UTR verification.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-purple-600" />
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Instant Processing</h3>
-                  <p className="text-sm text-gray-600">Real-time updates</p>
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Instant Processing</h3>
+                  <p className="text-xs sm:text-sm text-gray-600">Real-time updates</p>
                 </div>
               </div>
-              <p className="text-gray-700">
+              <p className="text-xs sm:text-sm text-gray-700">
                 Payments are processed immediately and reflected in your account instantly.
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-6 text-white">
-              <h3 className="font-bold text-lg mb-3">Need Help?</h3>
-              <p className="mb-4 text-emerald-100">
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-white">
+              <h3 className="font-bold text-base sm:text-lg mb-2 sm:mb-3">Need Help?</h3>
+              <p className="mb-3 sm:mb-4 text-emerald-100 text-xs sm:text-sm">
                 Contact our support team for assistance with payments.
               </p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <Smartphone className="w-3 h-3" />
                   </div>
-                  <span>+91 98765 43210</span>
+                  <span className="text-xs sm:text-sm">+91 98765 43210</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <CreditCard className="w-3 h-3" />
                   </div>
-                  <span>support@goldfinance.com</span>
+                  <span className="text-xs sm:text-sm break-all">support@goldfinance.com</span>
                 </div>
               </div>
             </div>
@@ -193,18 +193,18 @@ const PaymentForm = () => {
 
           {/* Right Side - Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center">
-                  <Send className="w-6 h-6 text-emerald-600" />
+            <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-lg p-4 sm:p-6 md:p-8">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Send className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Payment Details</h2>
-                  <p className="text-gray-600">Enter your payment information below</p>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Payment Details</h2>
+                  <p className="text-xs sm:text-sm text-gray-600">Enter your payment information below</p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Phone Number Field */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -215,7 +215,7 @@ const PaymentForm = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500">+91</span>
+                      <span className="text-gray-500 text-sm sm:text-base">+91</span>
                     </div>
                     <input
                       type="text"
@@ -223,15 +223,15 @@ const PaymentForm = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="Enter 10-digit phone number"
-                      className={`w-full pl-14 pr-4 py-3 border ${
+                      className={`w-full pl-12 sm:pl-14 pr-4 py-3 sm:py-3.5 border text-sm sm:text-base ${
                         formErrors.phone ? 'border-red-300' : 'border-gray-300'
-                      } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
+                      } rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
                       maxLength="10"
                     />
                   </div>
                   {formErrors.phone && (
-                    <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" />
+                    <p className="mt-2 text-xs sm:text-sm text-red-600 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       {formErrors.phone}
                     </p>
                   )}
@@ -247,7 +247,7 @@ const PaymentForm = () => {
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="text-gray-700 font-medium">₹</span>
+                      <span className="text-gray-700 font-medium text-sm sm:text-base">₹</span>
                     </div>
                     <input
                       type="number"
@@ -255,16 +255,16 @@ const PaymentForm = () => {
                       value={formData.paidAmount}
                       onChange={handleInputChange}
                       placeholder="0.00"
-                      className={`w-full pl-10 pr-4 py-3 border ${
+                      className={`w-full pl-10 pr-4 py-3 sm:py-3.5 border text-sm sm:text-base ${
                         formErrors.paidAmount ? 'border-red-300' : 'border-gray-300'
-                      } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
+                      } rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
                       step="0.01"
                       min="1"
                     />
                   </div>
                   {formErrors.paidAmount && (
-                    <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" />
+                    <p className="mt-2 text-xs sm:text-sm text-red-600 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       {formErrors.paidAmount}
                     </p>
                   )}
@@ -284,17 +284,17 @@ const PaymentForm = () => {
                     value={formData.utrNumber}
                     onChange={handleInputChange}
                     placeholder="Enter your transaction reference number"
-                    className={`w-full px-4 py-3 border ${
+                    className={`w-full px-4 py-3 sm:py-3.5 border text-sm sm:text-base ${
                       formErrors.utrNumber ? 'border-red-300' : 'border-gray-300'
-                    } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
+                    } rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all`}
                   />
                   {formErrors.utrNumber && (
-                    <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                      <AlertCircle className="w-4 h-4" />
+                    <p className="mt-2 text-xs sm:text-sm text-red-600 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       {formErrors.utrNumber}
                     </p>
                   )}
-                  <p className="mt-2 text-sm text-gray-500">
+                  <p className="mt-2 text-xs sm:text-sm text-gray-500">
                     Unique Transaction Reference number from your bank receipt
                   </p>
                 </div>
@@ -303,7 +303,7 @@ const PaymentForm = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 ${
+                  className={`w-full min-h-[44px] py-3 sm:py-4 px-4 sm:px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-sm sm:text-base ${
                     loading ? 'opacity-80 cursor-not-allowed' : 'hover:from-emerald-600 hover:to-emerald-700'
                   }`}
                 >
@@ -323,31 +323,31 @@ const PaymentForm = () => {
 
               {/* Status Message */}
               {message.text && (
-                <div className={`mt-6 p-4 rounded-xl border ${
+                <div className={`mt-4 sm:mt-6 p-3 sm:p-4 rounded-lg sm:rounded-xl border ${
                   message.type === 'success' 
                     ? 'bg-emerald-50 border-emerald-200' 
                     : 'bg-red-50 border-red-200'
                 }`}>
-                  <div className="flex items-start gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                       message.type === 'success' 
                         ? 'bg-emerald-100 text-emerald-600' 
                         : 'bg-red-100 text-red-600'
                     }`}>
                       {message.type === 'success' ? (
-                        <CheckCircle className="w-5 h-5" />
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                       ) : (
-                        <AlertCircle className="w-5 h-5" />
+                        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                       )}
                     </div>
-                    <div className="flex-1">
-                      <p className={`font-medium ${
+                    <div className="flex-1 min-w-0">
+                      <p className={`font-medium text-sm sm:text-base ${
                         message.type === 'success' ? 'text-emerald-800' : 'text-red-800'
                       }`}>
                         {message.text}
                       </p>
                       {message.type === 'success' && (
-                        <p className="text-sm text-emerald-600 mt-1">
+                        <p className="text-xs sm:text-sm text-emerald-600 mt-1">
                           Payment details have been recorded successfully.
                         </p>
                       )}
@@ -357,8 +357,8 @@ const PaymentForm = () => {
               )}
 
               {/* Terms & Conditions */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <p className="text-sm text-gray-600">
+              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
+                <p className="text-xs sm:text-sm text-gray-600">
                   By submitting this payment, you agree to our{" "}
                   <a href="#" className="text-emerald-600 hover:text-emerald-700 font-medium">
                     Terms of Service

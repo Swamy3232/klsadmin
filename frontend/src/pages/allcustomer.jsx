@@ -245,67 +245,67 @@ const GoldUsersSummary = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Gold Users</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.totalUsers}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Total Gold Users</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{stats.totalUsers}</p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-blue-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               </div>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Amount Paid</p>
-                <p className="text-3xl font-bold text-emerald-600 mt-2">₹{stats.totalPaid.toLocaleString()}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Total Amount Paid</p>
+                <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-emerald-600 mt-1 sm:mt-2">₹{stats.totalPaid.toLocaleString()}</p>
               </div>
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                <IndianRupee className="w-6 h-6 text-emerald-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <IndianRupee className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
               </div>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total EMIs Paid</p>
-                <p className="text-3xl font-bold text-amber-600 mt-2">{stats.totalEmis}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Total EMIs Paid</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-amber-600 mt-1 sm:mt-2">{stats.totalEmis}</p>
               </div>
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-amber-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
               </div>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Remaining EMIs</p>
-                <p className="text-3xl font-bold text-purple-600 mt-2">{stats.remainingEmis}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-gray-600 truncate">Remaining EMIs</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-600 mt-1 sm:mt-2">{stats.remainingEmis}</p>
               </div>
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Clock className="w-6 h-6 text-purple-600" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Search & Filter */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search users by name or phone number..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm sm:text-base"
               />
             </div>
             
@@ -313,7 +313,7 @@ const GoldUsersSummary = () => {
               <div className="relative">
                 <button 
                   onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl hover:bg-gray-100 transition-all duration-200"
+                  className="min-h-[44px] flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-all duration-200 text-sm sm:text-base"
                 >
                   <Filter className="w-4 h-4" />
                   Filter
@@ -323,7 +323,7 @@ const GoldUsersSummary = () => {
                 </button>
                 
                 {showFilters && (
-                  <div className="absolute top-full mt-2 right-0 w-80 bg-white border border-gray-200 rounded-xl shadow-lg z-10 p-4">
+                  <div className="absolute top-full mt-2 right-0 w-72 sm:w-80 bg-white border border-gray-200 rounded-lg sm:rounded-xl shadow-lg z-10 p-3 sm:p-4">
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Payment Status</label>
@@ -391,31 +391,35 @@ const GoldUsersSummary = () => {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                     onClick={() => requestSort('phone')}
                   >
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4" />
-                      Phone {getSortIcon('phone')}
+                      <span className="hidden sm:inline">Phone</span>
+                      <span className="sm:hidden">Phone</span>
+                      {getSortIcon('phone')}
                     </div>
                   </th>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                     onClick={() => requestSort('full_name')}
                   >
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4" />
-                      Customer {getSortIcon('full_name')}
+                      <span className="hidden sm:inline">Customer</span>
+                      <span className="sm:hidden">Name</span>
+                      {getSortIcon('full_name')}
                     </div>
                   </th>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors hidden md:table-cell"
                     onClick={() => requestSort('total_months')}
                   >
                     <div className="flex items-center gap-2">
@@ -424,16 +428,18 @@ const GoldUsersSummary = () => {
                     </div>
                   </th>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                     onClick={() => requestSort('payments_count')}
                   >
                     <div className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4" />
-                      Paid EMIs {getSortIcon('payments_count')}
+                      <span className="hidden sm:inline">Paid EMIs</span>
+                      <span className="sm:hidden">Paid</span>
+                      {getSortIcon('payments_count')}
                     </div>
                   </th>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors hidden lg:table-cell"
                     onClick={() => requestSort('remaining_months')}
                   >
                     <div className="flex items-center gap-2">
@@ -442,12 +448,14 @@ const GoldUsersSummary = () => {
                     </div>
                   </th>
                   <th 
-                    className="p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
+                    className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                     onClick={() => requestSort('total_paid')}
                   >
                     <div className="flex items-center gap-2">
                       <IndianRupee className="w-4 h-4" />
-                      Amount Paid {getSortIcon('total_paid')}
+                      <span className="hidden sm:inline">Amount Paid</span>
+                      <span className="sm:hidden">Amount</span>
+                      {getSortIcon('total_paid')}
                     </div>
                   </th>
                 </tr>
@@ -475,56 +483,57 @@ const GoldUsersSummary = () => {
                       key={user.phone} 
                       className="hover:bg-gray-50 transition-colors duration-150"
                     >
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl flex items-center justify-center">
-                            <Phone className="w-5 h-5 text-blue-600" />
+                      <td className="p-3 sm:p-6">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                           </div>
-                          <span className="font-mono font-medium text-gray-900">{user.phone}</span>
+                          <span className="font-mono font-medium text-gray-900 text-sm sm:text-base">{user.phone}</span>
                         </div>
                       </td>
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-amber-100 to-amber-50 rounded-full flex items-center justify-center">
-                            <User className="w-5 h-5 text-amber-600" />
+                      <td className="p-3 sm:p-6">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-100 to-amber-50 rounded-full flex items-center justify-center flex-shrink-0">
+                            <User className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
                           </div>
-                          <div>
-                            <p className="font-semibold text-gray-900">{user.full_name}</p>
-                            <p className="text-sm text-gray-500">Gold Plan Member</p>
+                          <div className="min-w-0">
+                            <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">{user.full_name}</p>
+                            <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Gold Plan Member</p>
                           </div>
                         </div>
                       </td>
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-                            <span className="text-lg font-bold text-gray-700">{user.total_months}</span>
+                      <td className="p-3 sm:p-6 hidden md:table-cell">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span className="text-base sm:text-lg font-bold text-gray-700">{user.total_months}</span>
                           </div>
-                          <div className="text-sm text-gray-600">Total months</div>
+                          <div className="text-xs sm:text-sm text-gray-600">Total months</div>
                         </div>
                       </td>
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
-                            <span className="text-lg font-bold text-emerald-700">{user.payments_count}</span>
+                      <td className="p-3 sm:p-6">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span className="text-base sm:text-lg font-bold text-emerald-700">{user.payments_count}</span>
                           </div>
-                          <div className="text-sm text-gray-600">EMIs completed</div>
+                          <div className="text-xs sm:text-sm text-gray-600 hidden sm:block">EMIs completed</div>
+                          <div className="text-xs text-gray-600 sm:hidden">Paid</div>
                         </div>
                       </td>
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                            <span className="text-lg font-bold text-amber-700">{user.remaining_months}</span>
+                      <td className="p-3 sm:p-6 hidden lg:table-cell">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-amber-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span className="text-base sm:text-lg font-bold text-amber-700">{user.remaining_months}</span>
                           </div>
-                          <div className="text-sm text-gray-600">Months left</div>
+                          <div className="text-xs sm:text-sm text-gray-600">Months left</div>
                         </div>
                       </td>
-                      <td className="p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1">
-                            <p className="text-xl font-bold text-gray-900">₹{user.total_paid?.toLocaleString()}</p>
-                            <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                      <td className="p-3 sm:p-6">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-lg sm:text-xl font-bold text-gray-900">₹{user.total_paid?.toLocaleString()}</p>
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2 mt-1 sm:mt-2">
                               <div 
-                                className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-2 rounded-full"
+                                className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-1.5 sm:h-2 rounded-full"
                                 style={{ 
                                   width: `${Math.min((user.payments_count / user.total_months) * 100, 100)}%` 
                                 }}
@@ -545,17 +554,17 @@ const GoldUsersSummary = () => {
           
           {/* Table Footer */}
           {filteredData.length > 0 && (
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
-              <p className="text-sm text-gray-600">
+            <div className="px-3 sm:px-6 py-3 sm:py-4 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
                 Showing <span className="font-semibold">{filteredData.length}</span> of{" "}
                 <span className="font-semibold">{data.length}</span> gold users
               </p>
-              <div className="flex items-center gap-4">
-                <button className="text-sm text-gray-600 hover:text-gray-900 px-3 py-1 rounded-lg hover:bg-gray-100">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <button className="min-h-[44px] text-xs sm:text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
                   Previous
                 </button>
-                <span className="text-sm font-medium text-gray-900">1</span>
-                <button className="text-sm text-gray-600 hover:text-gray-900 px-3 py-1 rounded-lg hover:bg-gray-100">
+                <span className="text-xs sm:text-sm font-medium text-gray-900">1</span>
+                <button className="min-h-[44px] text-xs sm:text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100">
                   Next
                 </button>
               </div>
@@ -564,17 +573,17 @@ const GoldUsersSummary = () => {
         </div>
 
         {/* Summary Section */}
-        <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-2xl border border-amber-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-amber-900">Gold Scheme Performance</h3>
-              <p className="text-amber-700 mt-1">
+        <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-xl sm:rounded-2xl border border-amber-200 p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex-1">
+              <h3 className="text-base sm:text-lg font-semibold text-amber-900">Gold Scheme Performance</h3>
+              <p className="text-sm sm:text-base text-amber-700 mt-1">
                 {filteredData.length === data.length ? 'Total' : 'Filtered'} collection from {filteredData.length === data.length ? 'all' : ''} gold users: <span className="font-bold">₹{stats.totalPaid.toLocaleString()}</span>
               </p>
             </div>
             <div className="flex items-center gap-2 text-amber-700">
-              <TrendingUp className="w-5 h-5" />
-              <span className="font-medium">
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <span className="text-sm sm:text-base font-medium">
                 {filteredData.length > 0 ? 
                   Math.round((stats.totalEmis / (stats.totalEmis + stats.remainingEmis)) * 100) : 0}% EMI Completion Rate
               </span>

@@ -148,24 +148,24 @@ const AddCustomer = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-blue-100 rounded-full">
-              <UserPlus className="w-8 h-8 text-blue-600" />
+        <div className="text-center mb-6 sm:mb-10">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <div className="p-2 sm:p-3 bg-blue-100 rounded-full">
+              <UserPlus className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
               Add New Customer
             </h1>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-4">
             Add new customers to your system. Select duration of 12 or 24 months.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8">
               {/* Status Messages */}
               {message && (
                 <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
@@ -201,7 +201,7 @@ const AddCustomer = () => {
                         placeholder="Enter phone number"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -217,7 +217,7 @@ const AddCustomer = () => {
                         placeholder="Enter full name"
                         value={formData.full_name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -233,7 +233,7 @@ const AddCustomer = () => {
                         placeholder="Enter complete address"
                         value={formData.address}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -249,7 +249,7 @@ const AddCustomer = () => {
                         placeholder="Set password"
                         value={formData.password}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -274,7 +274,7 @@ const AddCustomer = () => {
                         name="start_date"
                         value={formData.start_date}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -288,7 +288,7 @@ const AddCustomer = () => {
                         name="total_months"
                         value={formData.total_months}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none text-sm sm:text-base"
                         required
                       >
                         <option value="12">12 Months</option>
@@ -299,11 +299,11 @@ const AddCustomer = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-6 flex flex-col sm:flex-row gap-4">
+                <div className="pt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="min-h-[44px] flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
@@ -312,7 +312,7 @@ const AddCustomer = () => {
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        <UserPlus className="w-5 h-5" />
+                        <UserPlus className="w-4 h-4 sm:w-5 sm:h-5" />
                         Add Customer
                       </span>
                     )}
@@ -321,7 +321,7 @@ const AddCustomer = () => {
                   <button
                     type="button"
                     onClick={clearForm}
-                    className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition"
+                    className="min-h-[44px] px-4 sm:px-6 py-3 border border-gray-300 text-gray-700 rounded-lg sm:rounded-xl font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition text-sm sm:text-base"
                   >
                     Clear Form
                   </button>
@@ -331,14 +331,14 @@ const AddCustomer = () => {
           </div>
 
           {/* Sidebar - Demo & Info */}
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Demo Data Section */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-xl p-6 border border-blue-100">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-blue-600" />
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-blue-100">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4 flex items-center gap-2">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                 Quick Demo Fill
               </h3>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4">
                 Click below to fill form with demo data for testing:
               </p>
               
@@ -359,28 +359,28 @@ const AddCustomer = () => {
             </div>
 
             {/* Info Section */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">
                 Subscription Info
               </h3>
               
-              <div className="space-y-3">
-                <div className="p-3 border border-gray-200 rounded-lg">
-                  <div className="font-medium text-gray-800">12 Months Plan</div>
-                  <div className="text-sm text-gray-600">Short-term subscription</div>
+              <div className="space-y-2 sm:space-y-3">
+                <div className="p-2.5 sm:p-3 border border-gray-200 rounded-lg">
+                  <div className="font-medium text-gray-800 text-sm sm:text-base">12 Months Plan</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Short-term subscription</div>
                 </div>
-                <div className="p-3 border border-gray-200 rounded-lg">
-                  <div className="font-medium text-gray-800">24 Months Plan</div>
-                  <div className="text-sm text-gray-600">Long-term subscription</div>
+                <div className="p-2.5 sm:p-3 border border-gray-200 rounded-lg">
+                  <div className="font-medium text-gray-800 text-sm sm:text-base">24 Months Plan</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Long-term subscription</div>
                 </div>
               </div>
               
-              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-medium text-blue-800">Note</h4>
-                    <p className="text-sm text-blue-700 mt-1">
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg sm:rounded-xl">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div className="min-w-0">
+                    <h4 className="font-medium text-blue-800 text-sm sm:text-base">Note</h4>
+                    <p className="text-xs sm:text-sm text-blue-700 mt-1">
                       Customer will be created with "pending" status and requires admin approval.
                     </p>
                   </div>
@@ -389,23 +389,23 @@ const AddCustomer = () => {
             </div>
 
             {/* Summary Card */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-6 text-white">
-              <h3 className="text-lg font-semibold mb-4">Current Selection</h3>
-              <div className="space-y-3">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 text-white">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Current Selection</h3>
+              <div className="space-y-2 sm:space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-blue-100">Duration:</span>
-                  <span className="font-semibold">
+                  <span className="text-blue-100 text-xs sm:text-sm">Duration:</span>
+                  <span className="font-semibold text-sm sm:text-base">
                     {formData.total_months || 24} months
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-blue-100">Start Date:</span>
-                  <span className="font-semibold">
+                  <span className="text-blue-100 text-xs sm:text-sm">Start Date:</span>
+                  <span className="font-semibold text-xs sm:text-sm break-all text-right ml-2">
                     {formData.start_date || 'Not selected'}
                   </span>
                 </div>
-                <div className="pt-4 border-t border-blue-500">
-                  <div className="flex justify-between items-center text-sm">
+                <div className="pt-3 sm:pt-4 border-t border-blue-500">
+                  <div className="flex justify-between items-center text-xs sm:text-sm">
                     <span className="text-blue-100">Status:</span>
                     <span className="font-semibold text-yellow-300">Pending Approval</span>
                   </div>
