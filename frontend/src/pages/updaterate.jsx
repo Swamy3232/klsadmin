@@ -16,7 +16,7 @@ const MetalRates = () => {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   
-  const apiUrl = "http://127.0.0.1:8000";
+  const apiUrl = "https://klsbackend.onrender.com";
 
   // ---------------- GET ----------------
   const fetchMetalRates = async () => {
