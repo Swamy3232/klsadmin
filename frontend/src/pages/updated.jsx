@@ -22,6 +22,9 @@ const UpdateCustomer = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isEditStatusOpen, setIsEditStatusOpen] = useState(false);
+  const [editStatusCustomer, setEditStatusCustomer] = useState(null);
+  const [editApprovalStatus, setEditApprovalStatus] = useState("pending");
 
   useEffect(() => {
     fetchCustomers();
@@ -71,6 +74,24 @@ const UpdateCustomer = () => {
     } catch (error) {
       console.error("Error updating customer:", error);
     }
+  };
+
+  const openEditStatus = (customer) => {
+    setEditStatusCustomer(customer);
+    setEditApprovalStatus(customer?.approval_status || "pending");
+    setIsEditStatusOpen(true);
+  };
+
+  const closeEditStatus = () => {
+    setIsEditStatusOpen(false);
+    setEditStatusCustomer(null);
+    setEditApprovalStatus("pending");
+  };
+
+  const saveEditStatus = async () => {
+    if (!editStatusCustomer?.phone) return;
+    await updateCustomerStatus(editStatusCustomer.phone, editApprovalStatus);
+    closeEditStatus();
   };
 
   const getStatusColor = (status) => {
@@ -305,6 +326,12 @@ const UpdateCustomer = () => {
                           >
                             Reject
                           </button>
+                          <button
+                            onClick={() => openEditStatus(customer)}
+                            className="min-h-[44px] px-3 sm:px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors duration-200 font-medium text-sm"
+                          >
+                            Edit Status
+                          </button>
                           <button className="min-h-[44px] min-w-[44px] p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
                             <MoreVertical className="w-5 h-5" />
                           </button>
@@ -336,6 +363,56 @@ const UpdateCustomer = () => {
             </div>
           )}
         </div>
+
+        {/* Edit Status Modal */}
+        {isEditStatusOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+            onClick={closeEditStatus}
+          >
+            <div
+              className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-bold text-gray-900">Edit Approval Status</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {editStatusCustomer?.full_name || "Customer"} ({editStatusCustomer?.phone})
+                </p>
+              </div>
+
+              <div className="p-5 space-y-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Approval Status
+                </label>
+                <select
+                  value={editApprovalStatus}
+                  onChange={(e) => setEditApprovalStatus(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <div className="p-5 border-t border-gray-200 flex items-center justify-end gap-3">
+                <button
+                  onClick={closeEditStatus}
+                  className="min-h-[44px] px-4 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={saveEditStatus}
+                  className="min-h-[44px] px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

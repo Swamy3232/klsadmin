@@ -10,7 +10,9 @@ import {
   LogOut,
   Home,
   ChevronDown,
-  User
+  User,
+  IndianRupee,
+  Plus
 } from "lucide-react";
 
 const AdminNavbar = () => {
@@ -35,6 +37,7 @@ const AdminNavbar = () => {
       path: "/approve-members", 
       icon: <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
     },
+
     { 
       name: "All Chitti", 
       path: "/all-chitti", 
@@ -54,6 +57,16 @@ const AdminNavbar = () => {
       name:"Update Payments",
       path:"/update-payments",
       icon:<CreditCard className="w-4 h-4 md:w-5 md:h-5" />
+    },
+    {
+      name:"Update Rates",
+      path:"/update-rates",
+      icon:<IndianRupee className="w-4 h-4 md:w-5 md:h-5" />
+    },
+    {
+      name:"New Collection",
+      path: "/add-collection",
+      icon:<Plus className="w-4 h-4 md:w-5 md:h-5" />
     }
   ];
 

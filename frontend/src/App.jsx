@@ -11,7 +11,9 @@ import AdminNavbar from "./components/nav";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PaymentForm from "./pages/payment";
 import Payments from "./pages/updateamount";
-
+// import UpdateRate from "./pages/updaterate";
+import MetalRates from "./pages/updaterate";
+import KLSGoldAdmin from "./pages/adgold";
 function App() {
   return (
     <Router>
@@ -50,6 +52,15 @@ function App() {
           }
         />
         <Route
+           path="/update-rates"
+            element={
+              <ProtectedRoute>
+                <AdminNavbar />
+                <MetalRates />
+              </ProtectedRoute>
+            }
+        />
+        <Route
           path="/payments"
           element={
             <ProtectedRoute>
@@ -64,6 +75,15 @@ function App() {
             <ProtectedRoute>
               <AdminNavbar />
               <Payments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-collection"
+          element={
+            <ProtectedRoute>
+              <AdminNavbar />
+              <KLSGoldAdmin />
             </ProtectedRoute>
           }
         />

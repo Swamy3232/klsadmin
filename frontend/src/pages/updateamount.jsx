@@ -27,7 +27,6 @@ import {
   X,
   BarChart3,
   FileText,
-  Layers
 } from "lucide-react";
 
 const Payments = () => {
@@ -38,10 +37,11 @@ const Payments = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [monthFilter, setMonthFilter] = useState("all");
   const [yearFilter, setYearFilter] = useState(new Date().getFullYear());
-  const [selectedPayments, setSelectedPayments] = useState([]);
-  const [bulkAction, setBulkAction] = useState("");
   const [filteredPayments, setFilteredPayments] = useState([]);
   const [viewMode, setViewMode] = useState("table"); // "table" or "monthly"
+  const [isEditStatusOpen, setIsEditStatusOpen] = useState(false);
+  const [editStatusPayment, setEditStatusPayment] = useState(null);
+  const [editApprovalStatus, setEditApprovalStatus] = useState("pending");
 
   useEffect(() => {
     fetchPayments();
@@ -141,43 +141,37 @@ const Payments = () => {
     }
   };
 
-  const handleBulkAction = async () => {
-    if (!bulkAction || selectedPayments.length === 0) return;
+  const openEditStatus = (payment) => {
+    setEditStatusPayment(payment);
+    setEditApprovalStatus(payment?.approval_status || "pending");
+    setIsEditStatusOpen(true);
+  };
 
+  const closeEditStatus = () => {
+    setIsEditStatusOpen(false);
+    setEditStatusPayment(null);
+    setEditApprovalStatus("pending");
+  };
+
+  const saveEditStatus = async () => {
+    if (!editStatusPayment) return;
+    
     try {
-      const promises = selectedPayments.map(paymentId => {
-        const payment = payments.find(p => p.id === paymentId);
-        if (!payment) return Promise.resolve();
-        
-        return axios.put("https://klsbackend.onrender.com/update-payment", {
-          phone: payment.phone,
-          created_at: payment.created_at,
-          approval_status: bulkAction,
-        });
+      setUpdatingId(editStatusPayment.id);
+      await axios.put("https://klsbackend.onrender.com/update-payment", {
+        phone: editStatusPayment.phone,
+        created_at: editStatusPayment.created_at,
+        approval_status: editApprovalStatus,
       });
-
-      await Promise.all(promises);
-      setSelectedPayments([]);
-      setBulkAction("");
-      fetchPayments();
+      
+      // Refresh payments and close modal
+      await fetchPayments();
+      closeEditStatus();
     } catch (err) {
-      console.error("Bulk update failed:", err);
-    }
-  };
-
-  const togglePaymentSelection = (paymentId) => {
-    setSelectedPayments(prev =>
-      prev.includes(paymentId)
-        ? prev.filter(id => id !== paymentId)
-        : [...prev, paymentId]
-    );
-  };
-
-  const selectAllPayments = () => {
-    if (selectedPayments.length === filteredPayments.length) {
-      setSelectedPayments([]);
-    } else {
-      setSelectedPayments(filteredPayments.map(p => p.id));
+      console.error("Failed to update payment status:", err);
+      alert("Failed to update payment status. Please try again.");
+    } finally {
+      setUpdatingId(null);
     }
   };
 
@@ -455,52 +449,6 @@ const Payments = () => {
           </div>
         </div>
 
-        {/* Bulk Actions */}
-        {selectedPayments.length > 0 && (
-          <div className="bg-blue-50 rounded-2xl border border-blue-200 p-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <Layers className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-medium text-blue-900">
-                    {selectedPayments.length} payment{selectedPayments.length !== 1 ? 's' : ''} selected
-                  </p>
-                  <p className="text-sm text-blue-700">Choose an action below</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <select
-                  value={bulkAction}
-                  onChange={(e) => setBulkAction(e.target.value)}
-                  className="px-4 py-2.5 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select Action</option>
-                  <option value="approved">Approve Selected</option>
-                  <option value="rejected">Reject Selected</option>
-                </select>
-                
-                <button
-                  onClick={handleBulkAction}
-                  disabled={!bulkAction}
-                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Apply
-                </button>
-                
-                <button
-                  onClick={() => setSelectedPayments([])}
-                  className="px-4 py-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-xl"
-                >
-                  Clear
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Monthly View */}
         {viewMode === "monthly" ? (
           <div className="space-y-6">
@@ -584,16 +532,7 @@ const Payments = () => {
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={selectedPayments.length === filteredPayments.length && filteredPayments.length > 0}
-                          onChange={selectAllPayments}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 sm:w-5 sm:h-5"
-                        />
-                        <span className="hidden sm:inline">Customer</span>
-                        <span className="sm:hidden">Customer</span>
-                      </div>
+                      Customer
                     </th>
                     <th className="p-3 sm:p-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden sm:table-cell">
                       <div className="flex items-center gap-2">
@@ -646,16 +585,13 @@ const Payments = () => {
                       </td>
                     </tr>
                   ) : (
-                    filteredPayments.map((payment) => (
-                      <tr key={payment.id} className="hover:bg-gray-50 transition-colors duration-150">
+                    filteredPayments.map((payment, idx) => (
+                      <tr
+                        key={`${payment.id ?? ""}-${payment.phone ?? ""}-${payment.created_at ?? ""}-${idx}`}
+                        className="hover:bg-gray-50 transition-colors duration-150"
+                      >
                         <td className="p-3 sm:p-6">
                           <div className="flex items-center gap-2 sm:gap-3">
-                            <input
-                              type="checkbox"
-                              checked={selectedPayments.includes(payment.id)}
-                              onChange={() => togglePaymentSelection(payment.id)}
-                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
-                            />
                             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
                               <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                             </div>
@@ -756,6 +692,13 @@ const Payments = () => {
                                 <span className="text-gray-400 italic text-xs sm:text-sm hidden sm:inline">Processed</span>
                               </div>
                             )}
+                            <button
+                              onClick={() => openEditStatus(payment)}
+                              disabled={updatingId === payment.id}
+                              className="min-h-[44px] px-3 sm:px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+                            >
+                              Edit Status
+                            </button>
                             <button className="min-h-[44px] min-w-[44px] p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
                               <MoreVertical className="w-5 h-5" />
                             </button>
@@ -832,6 +775,64 @@ const Payments = () => {
             </div>
           </div>
         </div>
+
+        {/* Edit Status Modal */}
+        {isEditStatusOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+            onClick={closeEditStatus}
+          >
+            <div
+              className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-bold text-gray-900">Edit Payment Status</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {editStatusPayment?.name || "Customer"} ({editStatusPayment?.phone})
+                </p>
+              </div>
+
+              <div className="p-5 space-y-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Approval Status
+                </label>
+                <select
+                  value={editApprovalStatus}
+                  onChange={(e) => setEditApprovalStatus(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <div className="p-5 border-t border-gray-200 flex items-center justify-end gap-3">
+                <button
+                  onClick={closeEditStatus}
+                  className="min-h-[44px] px-4 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={saveEditStatus}
+                  disabled={updatingId === editStatusPayment?.id}
+                  className="min-h-[44px] px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {updatingId === editStatusPayment?.id ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    "Save"
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
