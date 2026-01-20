@@ -258,13 +258,13 @@ const LoginPage = () => {
                       )}
                     </button>
 
-                    <button
+                    {/* <button
                       type="button"
                       onClick={handleDemoLogin}
                       className="w-full min-h-[44px] py-3 px-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold rounded-lg sm:rounded-xl hover:from-yellow-700 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition text-sm sm:text-base"
                     >
                       Use Demo Credentials
-                    </button>
+                    </button> */}
                   </div>
                 </form>
 

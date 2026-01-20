@@ -14,13 +14,15 @@ const KLSGoldAdmin = () => {
   const [loading, setLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    type: 'Gold',
-    weight_gm: '',
-    gender: 'Male',
-    image: null
-  });
+ const [formData, setFormData] = useState({
+  name: '',
+  type: 'Gold',
+  purity: '',
+  weight_gm: '',
+  gender: 'Male',
+  image: null
+});
+
   const [previewImage, setPreviewImage] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -34,27 +36,30 @@ const KLSGoldAdmin = () => {
     fetchCollections();
   }, []);
 
-  const fetchCollections = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('http://127.0.0.1:8000/gold');
-      const result = await response.json();
-      if (result.status === 'success') {
-        setCollections(result.data);
-      }
-    } catch (error) {
-      console.error('Error fetching collections:', error);
-    } finally {
-      setLoading(false);
+ const fetchCollections = async () => {
+  setLoading(true);
+  try {
+    const response = await fetch('https://test-check-q5kj.onrender.com/gold');
+    const result = await response.json();
+
+    // ✅ FIX HERE
+    if (result.data) {
+      setCollections(result.data);
     }
-  };
+  } catch (error) {
+    console.error('Error fetching collections:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     
     setDeleteLoading(id);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/gold/${id}`, {
+      const response = await fetch(`https://test-check-q5kj.onrender.com/gold/${id}`, {
         method: 'DELETE',
       });
       const result = await response.json();
@@ -136,10 +141,12 @@ const KLSGoldAdmin = () => {
       formDataToSend.append('name', formData.name);
       formDataToSend.append('type', formData.type);
       formDataToSend.append('weight_gm', formData.weight_gm);
+      formDataToSend.append('purity', formData.purity);
+
       formDataToSend.append('gender', formData.gender);
       formDataToSend.append('image', formData.image);
       
-      const response = await fetch('http://127.0.0.1:8000/gold', {
+      const response = await fetch('https://test-check-q5kj.onrender.com/gold', {
         method: 'POST',
         body: formDataToSend,
       });
@@ -270,6 +277,11 @@ const KLSGoldAdmin = () => {
                               <span>{item.weight_gm} gm</span>
                             </div>
                             <div className="flex items-center gap-2">
+                              <span className="font-medium">Purity:</span>
+                              <span>{item.purity || '—'}</span>
+                            </div>
+
+                            <div className="flex items-center gap-2">
                               <span className="font-medium">Gender:</span>
                               <span>{item.gender}</span>
                             </div>
@@ -395,6 +407,23 @@ const KLSGoldAdmin = () => {
                       </select>
                     </div>
                   </div>
+                  <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Purity *
+  </label>
+  <select
+    name="purity"
+    value={formData.purity}
+    onChange={handleInputChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+  >
+    <option value="">Select purity</option>
+    <option value="24K">24K</option>
+    <option value="22K">22K</option>
+    <option value="18K">18K</option>
+    <option value="925">925 Silver</option>
+  </select>
+</div>
 
                   {/* Image Upload */}
                   <div>

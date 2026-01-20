@@ -53,32 +53,40 @@ const MetalRates = () => {
   };
 
   // ---------------- PUT ----------------
-  const handleUpdate = async () => {
-    if (!editingRate) return;
-    
-    try {
-      const res = await fetch(`${apiUrl}/update-metal-rate`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          metal_type: editingRate.metal_type,
-          effective_date: editingRate.effective_date,
-          purity: editingRate.purity,
-          rate_per_gram: editingRate.rate_per_gram,
-          rate_per_carat: editingRate.rate_per_carat,
-          currency: editingRate.currency,
-          updated_by: editingRate.updated_by,
-        }),
-      });
-      const data = await res.json();
-      alert(data.message || "Updated successfully!");
-      fetchMetalRates();
-      setEditingRate(null);
-    } catch (err) {
-      console.error(err);
-      alert("Error updating metal rate");
+ const handleUpdate = async () => {
+  if (!editingRate || !editingRate.id) {
+    alert("Invalid record selected");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${apiUrl}/update-metal-rate`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: editingRate.id,                // ✅ REQUIRED
+        purity: editingRate.purity,
+        rate_per_gram: Number(editingRate.rate_per_gram),
+        rate_per_carat: Number(editingRate.rate_per_carat),
+        currency: editingRate.currency,
+        updated_by: editingRate.updated_by,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.detail || "Failed to update metal rate");
     }
-  };
+
+    const data = await res.json();
+    alert(data.message || "Updated successfully!");
+    fetchMetalRates();
+    setEditingRate(null);
+  } catch (err) {
+    console.error(err);
+    alert(err.message || "Error updating metal rate");
+  }
+};
 
   // Helper functions
   const resetNewMetalForm = () => {
@@ -184,7 +192,7 @@ const MetalRates = () => {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {filteredRates.map((rate) => (
-                  <React.Fragment key={`${rate.metal_type}-${rate.effective_date}`}>
+                  <React.Fragment key={rate.id}>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -226,7 +234,7 @@ const MetalRates = () => {
                     </tr>
                     
                     {/* Edit Form Row */}
-                    {editingRate && editingRate.metal_type === rate.metal_type && editingRate.effective_date === rate.effective_date && (
+                    {editingRate && editingRate.id === rate.id && (
                       <tr className="bg-blue-50">
                         <td colSpan="8" className="px-6 py-4">
                           <div className="bg-white p-4 rounded-lg border border-blue-200">

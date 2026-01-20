@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png"; // KLS JEWELS logo
 import {
   Menu,
   X,
@@ -12,7 +13,9 @@ import {
   ChevronDown,
   User,
   IndianRupee,
-  Plus
+  Plus,
+  Gem,
+  Settings
 } from "lucide-react";
 
 const AdminNavbar = () => {
@@ -22,51 +25,45 @@ const AdminNavbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const navLinks = [
-    { 
-      name: "Dashboard", 
-      path: "/dashboard", 
-      icon: <Home className="w-4 h-4 md:w-5 md:h-5" />
-    },
+    // { 
+    //   name: "Dashboard", 
+    //   path: "/dashboard", 
+    //   icon: <Home className="w-4 h-4 md:w-5 md:h-5" />
+    // },
     { 
       name: "Add New Member", 
       path: "/add-member", 
       icon: <UserPlus className="w-4 h-4 md:w-5 md:h-5" />
     },
     { 
-      name: "Accept/Reject Members", 
+      name: "Approve Members", 
       path: "/approve-members", 
       icon: <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
     },
-
     { 
-      name: "All Chitti", 
+      name: "Chitti Collections", 
       path: "/all-chitti", 
-      icon: <Users className="w-4 h-4 md:w-5 md:h-5" />
+      icon: <Gem className="w-4 h-4 md:w-5 md:h-5" />
     },
     { 
-      name: "Add New Collection", 
+      name: "New Collection", 
       path: "/add-collection", 
+      icon: <Plus className="w-4 h-4 md:w-5 md:h-5" />
+    },
+    { 
+      name: "Transactions", 
+      path: "/payments", 
       icon: <CreditCard className="w-4 h-4 md:w-5 md:h-5" />
     },
-    { 
-      name:"Your Payments",
-      path:"/payments",
-      icon:<CreditCard className="w-4 h-4 md:w-5 md:h-5" />
+    {
+      name: "Update Payments",
+      path: "/update-payments",
+      icon: <CreditCard className="w-4 h-4 md:w-5 md:h-5" />
     },
     {
-      name:"Update Payments",
-      path:"/update-payments",
-      icon:<CreditCard className="w-4 h-4 md:w-5 md:h-5" />
-    },
-    {
-      name:"Update Rates",
-      path:"/update-rates",
-      icon:<IndianRupee className="w-4 h-4 md:w-5 md:h-5" />
-    },
-    {
-      name:"New Collection",
-      path: "/add-collection",
-      icon:<Plus className="w-4 h-4 md:w-5 md:h-5" />
+      name: "Gold Rates",
+      path: "/update-rates",
+      icon: <IndianRupee className="w-4 h-4 md:w-5 md:h-5" />
     }
   ];
 
@@ -75,22 +72,16 @@ const AdminNavbar = () => {
     navigate("/login");
   };
 
-  const userProfile = {
-    name: "Admin User",
-    email: "admin@chitti.com",
-    role: "Administrator"
-  };
-
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 to-blue-900 text-white shadow-xl">
+      <nav className="sticky top-0 z-50 bg-gradient-to-r from-amber-900 via-yellow-900 to-amber-800 text-white shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo and Brand */}
             <div className="flex items-center space-x-3 md:space-x-4">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-blue-800 transition"
+                className="md:hidden p-2 rounded-lg hover:bg-amber-800 transition"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
@@ -101,12 +92,20 @@ const AdminNavbar = () => {
               </button>
 
               <Link to="/dashboard" className="flex items-center space-x-3">
-                <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-                  <Users className="w-6 h-6 md:w-7 md:h-7" />
+                {/* Logo Image */}
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full p-1 flex items-center justify-center shadow-lg">
+                  <div className="w-full h-full bg-amber-900 rounded-full flex items-center justify-center">
+                    <img 
+                      src={logo} 
+                      alt="KLS Jewels Logo" 
+                      className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    />
+                  </div>
                 </div>
+                
                 <div className="hidden md:block">
-                  <h1 className="text-xl font-bold tracking-tight">Chitti Admin</h1>
-                  <p className="text-xs text-blue-200">Management System</p>
+                  <h1 className="text-xl font-bold tracking-tight text-amber-100">KLS JEWELS</h1>
+                  <p className="text-xs text-amber-300">Gold Management System</p>
                 </div>
               </Link>
             </div>
@@ -119,32 +118,30 @@ const AdminNavbar = () => {
                   to={link.path}
                   className={`flex items-center space-x-2 px-4 py-3 mx-1 rounded-xl text-sm font-medium transition-all duration-200 ${
                     location.pathname === link.path
-                      ? "bg-white/20 text-white shadow-lg"
-                      : "hover:bg-white/10 text-gray-200"
+                      ? "bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-lg"
+                      : "hover:bg-amber-800/50 text-amber-100"
                   }`}
                 >
-                  {link.icon}
+                  <div className={`${location.pathname === link.path ? 'text-white' : 'text-amber-300'}`}>
+                    {link.icon}
+                  </div>
                   <span>{link.name}</span>
                 </Link>
               ))}
             </div>
 
-            {/* User Profile and Actions */}
+            {/* User Profile */}
             <div className="flex items-center space-x-3 md:space-x-4">
               {/* Desktop Profile Dropdown */}
               <div className="hidden md:block relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="flex items-center space-x-3 p-2 rounded-xl hover:bg-white/10 transition"
+                  className="flex items-center space-x-3 p-2 rounded-xl hover:bg-amber-800/50 transition"
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5" />
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-400 rounded-full flex items-center justify-center shadow-md">
+                    <User className="w-5 h-5 text-amber-900" />
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm font-semibold">{userProfile.name}</p>
-                    <p className="text-xs text-gray-300">{userProfile.role}</p>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-4 h-4 text-amber-200 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Profile Dropdown Menu */}
@@ -154,25 +151,25 @@ const AdminNavbar = () => {
                       className="fixed inset-0 z-40"
                       onClick={() => setIsProfileOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-64 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 z-50 py-2">
-                      <div className="px-4 py-3 border-b border-gray-700">
-                        <p className="text-sm font-semibold">{userProfile.name}</p>
-                        <p className="text-xs text-gray-400 mt-1">{userProfile.email}</p>
+                    <div className="absolute right-0 mt-2 w-56 bg-amber-900 rounded-xl shadow-2xl border border-amber-700 z-50 py-2">
+                      <div className="px-4 py-3 border-b border-amber-700">
+                        <p className="text-sm font-semibold text-amber-100">Admin User</p>
+                        <p className="text-xs text-amber-300 mt-1">Gold Administrator</p>
                       </div>
                       <div className="py-2">
-                        <button className="w-full px-4 py-3 text-left text-sm hover:bg-gray-700 flex items-center space-x-3">
-                          <User className="w-4 h-4" />
-                          <span>Profile Settings</span>
+                        <button className="w-full px-4 py-3 text-left text-sm hover:bg-amber-800 text-amber-100 flex items-center space-x-3">
+                          <User className="w-4 h-4 text-amber-300" />
+                          <span>Profile</span>
                         </button>
-                        <button className="w-full px-4 py-3 text-left text-sm hover:bg-gray-700 flex items-center space-x-3">
-                          <CreditCard className="w-4 h-4" />
-                          <span>Billing</span>
+                        <button className="w-full px-4 py-3 text-left text-sm hover:bg-amber-800 text-amber-100 flex items-center space-x-3">
+                          <Settings className="w-4 h-4 text-amber-300" />
+                          <span>Settings</span>
                         </button>
                       </div>
-                      <div className="pt-2 border-t border-gray-700">
+                      <div className="pt-2 border-t border-amber-700">
                         <button
                           onClick={handleLogout}
-                          className="w-full px-4 py-3 text-left text-sm hover:bg-red-600/20 text-red-400 flex items-center space-x-3"
+                          className="w-full px-4 py-3 text-left text-sm hover:bg-red-600/20 text-amber-300 hover:text-red-400 flex items-center space-x-3"
                         >
                           <LogOut className="w-4 h-4" />
                           <span>Logout</span>
@@ -186,7 +183,7 @@ const AdminNavbar = () => {
               {/* Mobile Logout Button */}
               <button
                 onClick={handleLogout}
-                className="md:hidden p-2 rounded-lg hover:bg-red-600/20 transition"
+                className="md:hidden p-2 rounded-lg hover:bg-amber-800 transition"
                 aria-label="Logout"
               >
                 <LogOut className="w-6 h-6" />
@@ -205,28 +202,34 @@ const AdminNavbar = () => {
             />
 
             {/* Menu Panel */}
-            <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-gray-900 to-blue-900 shadow-2xl z-50 overflow-y-auto">
-              <div className="p-6 border-b border-gray-800">
+            <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-amber-900 to-yellow-900 shadow-2xl z-50 overflow-y-auto">
+              <div className="p-6 border-b border-amber-800">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                    <Users className="w-7 h-7" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full p-1">
+                    <div className="w-full h-full bg-amber-900 rounded-full flex items-center justify-center">
+                      <img 
+                        src={logo} 
+                        alt="KLS Jewels Logo" 
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold">Chitti Admin</h2>
-                    <p className="text-sm text-blue-300">Management System</p>
+                    <h2 className="text-lg font-bold text-amber-100">KLS JEWELS</h2>
+                    <p className="text-sm text-amber-300">Gold Management</p>
                   </div>
                 </div>
               </div>
 
               {/* Mobile Profile Info */}
-              <div className="p-6 border-b border-gray-800">
+              <div className="p-6 border-b border-amber-800">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5" />
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-400 rounded-full flex items-center justify-center shadow-md">
+                    <User className="w-5 h-5 text-amber-900" />
                   </div>
                   <div>
-                    <p className="font-semibold">{userProfile.name}</p>
-                    <p className="text-sm text-gray-400">{userProfile.role}</p>
+                    <p className="font-semibold text-amber-100">Admin</p>
+                    <p className="text-sm text-amber-300">Gold Administrator</p>
                   </div>
                 </div>
               </div>
@@ -241,8 +244,8 @@ const AdminNavbar = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                         location.pathname === link.path
-                          ? "bg-white/20 text-white"
-                          : "hover:bg-white/10 text-gray-200"
+                          ? "bg-gradient-to-r from-amber-600 to-yellow-600 text-white"
+                          : "hover:bg-amber-800/50 text-amber-100"
                       }`}
                     >
                       <div className="flex-shrink-0">{link.icon}</div>
@@ -253,27 +256,27 @@ const AdminNavbar = () => {
               </div>
 
               {/* Mobile Additional Options */}
-              <div className="p-4 border-t border-gray-800">
+              <div className="p-4 border-t border-amber-800">
                 <div className="space-y-2">
-                  <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm text-gray-200 hover:bg-white/10 transition">
-                    <User className="w-4 h-4" />
-                    <span>Profile Settings</span>
+                  <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm text-amber-100 hover:bg-amber-800/50 transition">
+                    <User className="w-4 h-4 text-amber-300" />
+                    <span>Profile</span>
                   </button>
-                  <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm text-gray-200 hover:bg-white/10 transition">
-                    <CreditCard className="w-4 h-4" />
-                    <span>Billing</span>
+                  <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm text-amber-100 hover:bg-amber-800/50 transition">
+                    <Settings className="w-4 h-4 text-amber-300" />
+                    <span>Settings</span>
                   </button>
                 </div>
               </div>
 
               {/* Mobile Logout */}
-              <div className="p-4 border-t border-gray-800">
+              <div className="p-4 border-t border-amber-800">
                 <button
                   onClick={() => {
                     setIsMenuOpen(false);
                     handleLogout();
                   }}
-                  className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 rounded-xl text-sm font-semibold hover:from-red-700 hover:to-red-800 transition"
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-amber-700 to-amber-800 rounded-xl text-sm font-semibold text-amber-100 hover:from-amber-800 hover:to-amber-900 transition"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
@@ -284,27 +287,27 @@ const AdminNavbar = () => {
         )}
       </nav>
 
-      {/* Mobile Floating Action Button (For quick access) */}
+      {/* Mobile Floating Action Button */}
       <div className="md:hidden fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsMenuOpen(true)}
-          className="w-14 h-14 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform"
+          className="w-14 h-14 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform"
           aria-label="Open menu"
         >
-          <Menu className="w-6 h-6 text-white" />
+          <Menu className="w-6 h-6 text-amber-900" />
         </button>
       </div>
 
       {/* Breadcrumb for Mobile */}
       {location.pathname !== "/dashboard" && (
-        <div className="md:hidden bg-gradient-to-r from-gray-800 to-blue-800 text-white py-2 px-4">
+        <div className="md:hidden bg-gradient-to-r from-amber-800 to-amber-900 text-amber-100 py-2 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center space-x-2 text-sm">
-              <Link to="/dashboard" className="text-blue-300 hover:text-white">
+              <Link to="/dashboard" className="text-amber-300 hover:text-amber-100">
                 Dashboard
               </Link>
-              <span className="text-gray-400">/</span>
-              <span className="font-medium">
+              <span className="text-amber-500">/</span>
+              <span className="font-medium text-amber-100">
                 {navLinks.find(link => link.path === location.pathname)?.name || "Current Page"}
               </span>
             </div>
