@@ -93,15 +93,12 @@ const AdminNavbar = () => {
 
               <Link to="/dashboard" className="flex items-center space-x-3">
                 {/* Logo Image */}
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full p-1 flex items-center justify-center shadow-lg">
-                  <div className="w-full h-full bg-amber-900 rounded-full flex items-center justify-center">
-                    <img 
-                      src={logo} 
-                      alt="KLS Jewels Logo" 
-                      className="w-8 h-8 md:w-10 md:h-10 object-contain"
-                    />
-                  </div>
-                </div>
+               <img
+  src={logo}
+  alt="KLS Jewels Logo"
+  className="w-12 h-12 md:w-10 md:h-12 object-contain"
+/>
+
                 
                 <div className="hidden md:block">
                   <h1 className="text-xl font-bold tracking-tight text-amber-100">KLS JEWELS</h1>
