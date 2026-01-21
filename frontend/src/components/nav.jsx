@@ -202,15 +202,12 @@ const AdminNavbar = () => {
             <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-amber-900 to-yellow-900 shadow-2xl z-50 overflow-y-auto">
               <div className="p-6 border-b border-amber-800">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full p-1">
-                    <div className="w-full h-full bg-amber-900 rounded-full flex items-center justify-center">
-                      <img 
-                        src={logo} 
-                        alt="KLS Jewels Logo" 
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                  </div>
+                 <img 
+  src={logo} 
+  alt="KLS Jewels Logo" 
+  className="w-12 h-12 object-contain"
+/>
+
                   <div>
                     <h2 className="text-lg font-bold text-amber-100">KLS JEWELS</h2>
                     <p className="text-sm text-amber-300">Gold Management</p>
